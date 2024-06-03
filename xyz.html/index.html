@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="../xyz.css/index.css">
+</head>
+<body>
+    <div class="div1">
+        <h1 style="margin-left:300px;">XYZ-COMPANY</h1>
+        <h2 style="margin-left: 230px;">CURRENCY EXCHANGE PLATFORM</h2>
+    </div>
+    <div style="background-color: white;width: 800px;height: 250px;margin-left: 230px;" class="div2"></div>
+    <fieldset>
+        <div style="margin-top: 40px;" class="money">
+            <label>Amount</label><br>
+            <input type="text" id="amount" name="amount">
+        </div>
+        <div style="margin-left: 250px;margin-top: -40px;" class="from">
+            <label>From</label><br>
+            <select id="fromCurrency">
+                <option value="USD">USD</option>
+                <option value="RWF">RWF</option>
+                <option value="SHILINGS">SHILINGS</option>
+            </select>
+        </div>
+        <div style="margin-left: 450px;margin-top: -40px;" class="to">
+            <label>To</label><br>
+            <select id="toCurrency">
+                <option value="RWF">RWANDA-RWF</option>
+                <option value="USD">USA-USD$</option>
+                <option value="UG">Shillings-UG</option>
+            </select>
+        </div>
+        <div class="convert">
+            <button onclick="convertCurrency()">Convert</button>
+        </div>
+        <div class="result">
+            <label>Result: </label><span id="result"></span>
+        </div>
+    </fieldset>
+
+    <script>
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+
+            // Define your conversion rates here
+            const conversionRates = {
+                'USD': {
+                    'RWF': 1000, // 1 USD = 1000 RWF
+                    'SHILINGS': 2000 // 1 USD = 2000 SHILINGS
+                },
+                'RWF': {
+                    'USD': 0.001, // 1 RWF = 0.001 USD
+                    'SHILINGS': 2 // 1 RWF = 2 SHILINGS
+                },
+                'SHILINGS': {
+                    'USD': 0.0005, // 1 SHILINGS = 0.0005 USD
+                    'RWF': 0.5 // 1 SHILINGS = 0.5 RWF
+                }
+            };
+
+            // Perform the conversion
+            const convertedAmount = amount * conversionRates[fromCurrency][toCurrency];
+            
+            // Display the result
+            document.getElementById('result').innerText = convertedAmount.toFixed(2) + ' ' + toCurrency;
+        }
+    </script>
+</body>
+</html>
